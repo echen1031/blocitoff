@@ -1,2 +1,4 @@
-<h1>Lists#new</h1>
-<p>Find me in app/views/lists/new.html.erb</p>
+<%= form_for List.new do |form| %>
+  <%= form.text_field :description, placeholder: 'Description' %>
+  <%= form.submit 'Save' %>
+<% end %>
