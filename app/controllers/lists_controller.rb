@@ -11,8 +11,11 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
-    @list.save
-    redirect_to @list, notice: 'Your new TODO list was saved'
+    if @list.save
+      redirect_to @list, notice: 'Your new TODO list was saved'
+    else
+      redirect_to @list, notice: 'Error: you should have content in description'
+    end
   end
 
   def edit
