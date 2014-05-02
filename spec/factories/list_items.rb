@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :list_item do
     content "MyString"
-    list_id 1
+    list
   end
 end

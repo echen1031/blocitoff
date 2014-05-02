@@ -1,8 +1,12 @@
 class ListItem < ActiveRecord::Base
+  DELETION_PERIOD = 7.days
+  
   belongs_to :list
-  belongs_to :user
   validates :content, presence: true
   validates :content, uniqueness: { scope: :content }
-  validates :list_id, presence: true
-  validates :user, presence: true
+  validates :list, presence: true
+
+  def deleted?
+    created_at < DELETION_PERIOD.ago
+  end
 end
