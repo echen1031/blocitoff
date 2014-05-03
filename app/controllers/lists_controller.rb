@@ -3,12 +3,16 @@ class ListsController < ApplicationController
     @lists = List.all
   end
 
+  def new
+    @list = List.new
+  end
+
   def show
     @list = List.find params[:id]
   end
 
-  def new
-    @list = List.new
+  def edit
+    @list = List.find params[:id]
   end
 
   def create
@@ -21,7 +25,7 @@ class ListsController < ApplicationController
     end
   end
 
-  def edit
+  def update
   end
 
   def destroy
