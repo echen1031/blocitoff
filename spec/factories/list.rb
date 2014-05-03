@@ -1,7 +1,7 @@
 
 FactoryGirl.define do
   factory :list do
-    description "blah blah"
+    sequence(:description, 100) {|n|  "blah #{n}blah"}
     user
   end
 end
