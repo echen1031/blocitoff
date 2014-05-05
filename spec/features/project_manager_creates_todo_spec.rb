@@ -14,7 +14,6 @@ feature 'Project manager creates TODO list' do
     sign_in(user.email, user.password)
     visit new_list_path
     fill_in 'Description', with: 'Meet up with the team'
-    binding.pry
     click_button 'Save'
     expect( page ).to have_content('Your new To-do list was saved')
     expect( page ).to have_content('Meet up with the team')
@@ -25,7 +24,7 @@ feature 'Project manager creates TODO list' do
     visit new_list_path
     fill_in 'Description', with: ''
     click_button 'Save'
-    expect( page ).to have_content('Error creating a To-do list')
+    expect( page ).to have_content('Error creating To-do list')
   end
 end
 

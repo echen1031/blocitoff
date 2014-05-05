@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ListsController do
-
   describe 'GET index' do
     let(:user) { FactoryGirl.create(:user)}
 
@@ -19,7 +18,6 @@ describe ListsController do
   end
 
   describe 'GET #new' do
-
     it 'assigns a new List to @list' do
       get :new
       expect(assigns(:list)).to be_a_new(List) 
@@ -29,7 +27,6 @@ describe ListsController do
       get :new
       expect(response).to render_template('new')
     end
-
   end 
 
   describe 'GET #show' do
@@ -69,21 +66,85 @@ describe ListsController do
 
     context 'with valid attributes' do
       it "creates a new list" do
+        list_attr = FactoryGirl.attributes_for(:list, user_id: user.id)
         expect{ 
-          post :create, list: FactoryGirl.attributes_for(:list, user: user)
+          post :create, list: list_attr
         }.to change(List,:count).by(1) 
       end 
 
       it 'redirects to the new list' do
-        post :create, list: FactoryGirl.attributes_for(:list, user: user)
+        list_attr = FactoryGirl.attributes_for(:list, user_id: user.id)
+        post :create, list: list_attr
         expect(response).to redirect_to List.last
       end
     end 
 
     context 'with invalid attributes' do
-      it 'does not save the new list in the database'
-      it 're-renders the :new template'
-    end 
+      it 'does not create a new list' do
+        expect{
+        post :create, list: FactoryGirl.attributes_for(:invalid_list)
+        }.to_not change(List,:count) 
+      end
+
+      it 're-renders the new list' do
+        post :create, list: FactoryGirl.attributes_for(:invalid_list)
+        expect(response).to render_template :new
+      end 
+    end
+  end
+
+  describe 'PUT #update' do
+    let(:user) { FactoryGirl.create(:user)}
+    before :each do
+      @list = List.create(user: user, description: 'Garden work')
+    end
+
+    context 'valid vattributes' do
+      it 'located the requested @list' do
+        put :update, id: @list, list: FactoryGirl.attributes_for(:list)
+        expect(assigns(:list)).to eq @list
+      end
+
+      it 'changes @list attributes' do
+        put :update, id: @list, 
+          list: FactoryGirl.attributes_for(:updated_list)
+        @list.reload
+        expect{ @list.description.to eq('Yard work')}
+      end
+
+      it 'redirects to updated list' do
+        put :update, id: @list, list: FactoryGirl.attributes_for(:list)
+        expect(response).to redirect_to @list
+      end
+    end
+
+    context 'invalid attributes' do
+      it 'locates the requested @list' do
+        put :update, id: @list, list: FactoryGirl.attributes_for(:invalid_list)
+        expect(assigns(:list)).to eq @list
+      end
+
+      it 'does not change @list attributes' do
+        put :update, id: @list, list: FactoryGirl.attributes_for(:invalid_list)
+        expect(response).to render_template :edit
+      end
+    end
+  end
+
+  describe 'DELETE destroy' do
+    let(:user) { FactoryGirl.create(:user)}
+
+    it 'deletes the list' do
+      @list = FactoryGirl.create(:list, user: user)
+      expect {
+        delete :destroy, id: @list
+      }.to change(List,:count).by(-1)
+    end
+
+    it 'redirects to lists@index' do
+      @list = FactoryGirl.create(:list, user: user)
+      delete :destroy, id: @list
+      expect(response).to redirect_to lists_path
+    end
   end
 end
-

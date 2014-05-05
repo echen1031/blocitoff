@@ -1,2 +1,18 @@
-<h1>Lists#edit</h1>
-<p>Find me in app/views/lists/edit.html.erb</p>
+<h1>Edit Topic</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <p> Guidelines for topics:</p>
+    <ul>
+      <li>Make sure the topic is appropriate.</li>
+      <li>Never insult dogs.</li>
+      <li>Smile when you type.</li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <%= render partial: 'form', locals: { list: @list } %>
+    <div class="form-group">
+  </div>
+</div>
+
+
