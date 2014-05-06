@@ -63,14 +63,21 @@ describe ListsController do
 
   describe 'POST #create' do
     let(:user) { FactoryGirl.create(:user)}
+    let(:list_item) { FactoryGirl.create(:list_item)}
 
     context 'with valid attributes' do
       it "creates a new list" do
-        list_attr = FactoryGirl.attributes_for(:list, user_id: user.id)
         expect{ 
-          post :create, list: list_attr
+          post :create, list: FactoryGirl.attributes_for(:list, user_id: user.id)
         }.to change(List,:count).by(1) 
       end 
+
+      it 'creates a new list with items' do
+        list_item_attr = FactoryGirl.attributes_for(:content)
+         expect{ 
+           post :create, list: list_item_attr
+         }.to change(ListItem, :count).by(1) 
+      end
 
       it 'redirects to the new list' do
         list_attr = FactoryGirl.attributes_for(:list, user_id: user.id)
