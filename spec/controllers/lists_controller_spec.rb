@@ -67,19 +67,22 @@ describe ListsController do
 
     context 'with valid attributes' do
       it "creates a new list" do
+        sign_in user
         expect{ 
-          post :create, list: FactoryGirl.attributes_for(:list, user_id: user.id)
+          post :create, list: FactoryGirl.attributes_for(:list)
         }.to change(List,:count).by(1) 
       end 
 
       it 'creates a new list with items' do
-        list_item_attr = FactoryGirl.attributes_for(:content)
+        sign_in user
+        list_item_attr = FactoryGirl.attributes_for(:list_item)
          expect{ 
            post :create, list: list_item_attr
          }.to change(ListItem, :count).by(1) 
       end
 
       it 'redirects to the new list' do
+        sign_in user
         list_attr = FactoryGirl.attributes_for(:list, user_id: user.id)
         post :create, list: list_attr
         expect(response).to redirect_to List.last
@@ -88,12 +91,14 @@ describe ListsController do
 
     context 'with invalid attributes' do
       it 'does not create a new list' do
+        sign_in user
         expect{
         post :create, list: FactoryGirl.attributes_for(:invalid_list)
         }.to_not change(List,:count) 
       end
 
       it 're-renders the new list' do
+        sign_in user
         post :create, list: FactoryGirl.attributes_for(:invalid_list)
         expect(response).to render_template :new
       end 
