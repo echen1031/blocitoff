@@ -61,7 +61,7 @@ describe ListsController do
     end
   end 
 
-  describe 'POST creating List with valid attributes and nested list_items attributes' do
+  describe 'POST #create' do
     let(:user) { FactoryGirl.create(:user)}
     let(:list_item) { FactoryGirl.create(:list_item)}
 

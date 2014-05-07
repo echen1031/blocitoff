@@ -18,7 +18,6 @@ class ListsController < ApplicationController
 
   def create
     @list = current_user.lists.build(list_params)
-    
     if @list.save
       redirect_to @list, notice: 'Your new To-do list was saved'
     else
@@ -52,6 +51,6 @@ class ListsController < ApplicationController
   private
  
   def list_params
-    params.require(:list).permit(:description)
+    params.require(:list).permit(:description, list_items_attributes: [:content, :list_id, :_destroy])
   end
 end
