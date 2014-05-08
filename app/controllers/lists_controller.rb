@@ -8,8 +8,8 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find params[:id]
-    @list_item = ListItem.new
+    @list = List.find(params[:id])
+    @list_item = ListItem.find(params[:id])
   end
 
   def edit

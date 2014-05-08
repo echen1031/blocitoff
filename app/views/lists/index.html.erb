@@ -1,21 +1,12 @@
-<h1>To-do Lists</h1>
-
-<div class="row">
-  <div class="col-md-8">
-    <% @lists.each do |list| %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to list.name, list %>
-          </h4>
-        </div>
-      </div>
-    <% end %>
-    <%=@toipcs %>
-  </div>
-  <div class="col-md-4">
-    <%# if policy(Topic.new).create? %>
-      <%=# link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
-    <%# end %>
-  </div>
+<div class="page-header">
+  <h1>To-do Lists</h1>
+</div>
+<div class="col-md-8">
+  <ul class="list-group">
+      <% @lists.each do |list| %>
+    <li class="list-group-item">
+        <%= link_to list.description, list %>
+      <% end %>
+    </li>
+  </ul>
 </div>

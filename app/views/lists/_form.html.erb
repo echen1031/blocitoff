@@ -1,12 +1,22 @@
 <%= simple_form_for @list do |f| %>
-  <div class="form-group">
-    <%= f.label :description %>
-    <%= f.text_field :description, class: 'form-control', placeholder: "Enter list description here" %>
-  </div>j
-  %h3 To do List
+<div class="row">
+  <div class="col-md-8">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <%= f.text_field :description, class: 'form-control', placeholder: "Start a To-do list here" %>
+      </li>
+    </ul>
       <%= f.simple_fields_for :list_items do |item| %>
         <%= render 'list_item_fields', :f => item %>
       <% end %>
-        <%= link_to_add_association 'add item', f, :list_items %>
-  <%= f.submit "Save", class: 'btn btn-success' %>
+    <div class="links">
+      <%= link_to_add_association "Add items", f, :list_items, :render_options => {:wrapper => "bootstrap"}, class: 'btn btn-primary' %>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.submit "Save list", class: 'btn btn-success' %>
+    </div>
+  </div>
+</div>
 <% end %>
+

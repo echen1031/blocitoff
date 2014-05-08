@@ -1,2 +1,12 @@
-<%= f.input :content %>
-<%= link_to_remove_association "remove item", f %>
+<div class="row">
+  <div class="col-md-8">
+    <ul class="form-group">
+      <%= f.text_field :content, class: 'form-control', placeholder: "Add your items here" %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <ul class="form-group">
+      <%= link_to_remove_association "remove item", f, :render_options => {:wrapper => "bootstrap"}, class: 'btn btn-danger' %>
+    </ul>
+  </div>
+</div>
