@@ -2,11 +2,11 @@
   <div class="form-group">
     <%= f.label :description %>
     <%= f.text_field :description, class: 'form-control', placeholder: "Enter list description here" %>
-  </div>
+  </div>j
   %h3 To do List
       <%= f.simple_fields_for :list_items do |item| %>
         <%= render 'list_item_fields', :f => item %>
-        .links
+      <% end %>
         <%= link_to_add_association 'add item', f, :list_items %>
   <%= f.submit "Save", class: 'btn btn-success' %>
 <% end %>

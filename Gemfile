@@ -12,6 +12,7 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'faker'
 gem 'cocoon'
+gem 'simple_form'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

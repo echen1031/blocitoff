@@ -75,11 +75,10 @@ describe ListsController do
 
       it 'creates a new list with items' do
         sign_in user
-        list_item_attr = FactoryGirl.attributes_for(:list_item)
          expect{ 
-           post :create, list: list_item_attr
+           post :create, list: FactoryGirl.attributes_for(:list, list_items_attributes: { "0" => FactoryGirl.attributes_for(:list_item)})
          }.to change(ListItem, :count).by(1) 
-      end
+      end 
 
       it 'redirects to the new list' do
         sign_in user

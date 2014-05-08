@@ -3,7 +3,6 @@ class ListItem < ActiveRecord::Base
   belongs_to :list
   validates :content, presence: true
   validates :content, uniqueness: { scope: :content }
-  validates :list, presence: true
 
   def deleted?
     created_at < TIME_TO_LIVE.ago
