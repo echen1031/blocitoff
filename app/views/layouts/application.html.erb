@@ -10,10 +10,17 @@
     <div class="container">
       <ul class="nav nav-tabs">
         <li><%= link_to "Blocitoff", root_path %></li>
+        <li><%= link_to "Lists", lists_path %></li>
       </ul>
       <div class="pull-right user-info">
         <% if current_user %>
-          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+          Hello <%= current_user.email%>!
+          <%= link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do %>
+            <span class="glyphicon glyphicon-user"></span> Edit
+          <% end %>
+          <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-sm' do %>
+            <span class="glyphicon"></span>Log out
+          <% end %>
         <% else %>
           <%= link_to "Sign In", new_user_session_path %> or
           <%= link_to "Sign up", new_user_registration_path %>
@@ -21,7 +28,23 @@
       </div>
       
       
-      <p><%= flash[:notice] if flash[:notice] %></p>
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:error] %>
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:error] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert">
+          <button type="button" class="close" data-dimiss="alert">&times;</button>
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
       <%= yield %>
 
     </div>
