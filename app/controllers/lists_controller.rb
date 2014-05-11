@@ -1,10 +1,12 @@
 class ListsController < ApplicationController
   def index
     @lists = List.all
+    authorize @lists
   end
 
   def new
     @list = List.new
+    authorize @list
   end
 
   def show
@@ -14,10 +16,12 @@ class ListsController < ApplicationController
 
   def edit
     @list = List.find params[:id]
+    authorize @list 
   end
 
   def create
     @list = current_user.lists.build(list_params)
+    authorize @list
     if @list.save
       redirect_to @list, notice: 'Your new To-do list was saved'
     else
@@ -28,6 +32,7 @@ class ListsController < ApplicationController
 
   def update
     @list = List.find(params[:id])
+    authorize @list
     if @list.update_attributes(list_params)
       redirect_to @list
     else

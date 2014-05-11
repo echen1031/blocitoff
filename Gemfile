@@ -13,6 +13,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'faker'
 gem 'cocoon'
 gem 'simple_form'
+gem 'pundit'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
