@@ -37,10 +37,7 @@ feature 'Project manager creates a TODO list with an item' do
     visit new_list_path
     fill_in 'Start a To-do list here', with: 'Garden Work'
     click_link('Add item')
-    within_fieldset('List') do
-      fill_in 'Add your items here', with: 'Mow the lawn'
-    end
-    click_button
+    fill_in 'Add your items here', with: 'Mow the lawn'
     click_button 'Save list'
     expect( page ).to havwe_content('Your new item was created')
   end
