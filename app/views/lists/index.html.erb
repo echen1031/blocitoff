@@ -9,8 +9,8 @@
 <div class="col-md-8">
   <ul class="list-group">
       <% @lists.each do |list| %>
-    <li class="list-group-item">
-        <%= link_to list.description, list %>
+            <li class="list-group-item">
+        <%= link_to list.description, edit_list_path(list) %>
       <% end %>
     </li>
   </ul>

@@ -11,7 +11,7 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    @list_item = ListItem.find(params[:id])
+    @list_items = @list.list_items
   end
 
   def edit
@@ -36,7 +36,8 @@ class ListsController < ApplicationController
     if @list.update_attributes(list_params)
       redirect_to @list
     else
-      flash[:notice] = 'Error updating To-do list. Please try again'
+      #flash[:notice] = 'Error updating To-do list. Please try again'
+      flash[:notice] = @list.errors.full_messages.join(", ")
       render :edit
     end
   end
@@ -56,6 +57,6 @@ class ListsController < ApplicationController
   private
  
   def list_params
-    params.require(:list).permit(:description, list_items_attributes: [:content, :list_id, :_destroy])
+    params.require(:list).permit(:description, list_items_attributes: [:id, :content, :list_id, :_destroy])
   end
 end
